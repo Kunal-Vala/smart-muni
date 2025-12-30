@@ -11,33 +11,29 @@ import { Separator } from '@/components/ui/separator';
 
 export default function WaterUpdates() {
   return (
-    <Card className="h-full">
-      <CardHeader className="flex flex-row items-center gap-4">
-        <Droplets className="h-8 w-8 text-accent" />
-        <div>
-          <CardTitle>Water Supply Updates</CardTitle>
-          <CardDescription>Current notices and supply timings.</CardDescription>
+    <Card>
+      <CardHeader className="pb-3">
+        <div className="flex items-center gap-2">
+          <Droplets className="h-5 w-5 text-accent" />
+          <CardTitle className="text-lg">Water Updates</CardTitle>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {waterUpdates.map((update, index) => (
-            <div key={update.id}>
-              <div className="mb-2">
-                <h3 className="font-semibold">{update.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {new Date(update.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </p>
-              </div>
-              <p className="text-sm">{update.message}</p>
-              {index < waterUpdates.length - 1 && <Separator className="mt-4" />}
+      <CardContent className="space-y-3">
+        {waterUpdates.map((update, index) => (
+          <div key={update.id}>
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold">{update.title}</h3>
+              <p className="text-xs text-muted-foreground">
+                {new Date(update.date).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </p>
+              <p className="text-xs leading-relaxed">{update.message}</p>
             </div>
-          ))}
-        </div>
+            {index < waterUpdates.length - 1 && <Separator className="mt-3" />}
+          </div>
+        ))}
       </CardContent>
     </Card>
   );

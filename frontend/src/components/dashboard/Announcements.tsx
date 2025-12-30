@@ -12,39 +12,29 @@ import { Megaphone } from 'lucide-react';
 
 export default function Announcements() {
   return (
-    <Card className="h-full">
-      <CardHeader className="flex flex-row items-center gap-4">
-        <Megaphone className="h-8 w-8 text-accent" />
-        <div>
-          <CardTitle>Municipal Announcements</CardTitle>
-          <CardDescription>
-            Latest news and updates from the city council.
-          </CardDescription>
+    <Card>
+      <CardHeader className="pb-3">
+        <div className="flex items-center gap-2">
+          <Megaphone className="h-5 w-5 text-accent" />
+          <CardTitle className="text-lg">Announcements</CardTitle>
         </div>
       </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[280px]">
-          <div className="space-y-4">
-            {announcements.map((announcement, index) => (
-              <div key={announcement.id}>
-                <div className="mb-2">
-                  <h3 className="font-semibold">{announcement.title}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(announcement.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </p>
-                </div>
-                <p className="text-sm">{announcement.content}</p>
-                {index < announcements.length - 1 && (
-                  <Separator className="mt-4" />
-                )}
-              </div>
-            ))}
+      <CardContent className="space-y-3">
+        {announcements.slice(0, 3).map((announcement, index) => (
+          <div key={announcement.id}>
+            <div className="space-y-1">
+              <h3 className="text-sm font-semibold">{announcement.title}</h3>
+              <p className="text-xs text-muted-foreground">
+                {new Date(announcement.date).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </p>
+              <p className="text-xs leading-relaxed line-clamp-2">{announcement.content}</p>
+            </div>
+            {index < 2 && <Separator className="mt-3" />}
           </div>
-        </ScrollArea>
+        ))}
       </CardContent>
     </Card>
   );
